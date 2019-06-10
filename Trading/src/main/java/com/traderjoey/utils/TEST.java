@@ -5,4 +5,5 @@ public class TEST {
     //FIXME test fixme
 	//FIXME can
     //TODO fan
+    // 这是一个测试编码的文件
 }
