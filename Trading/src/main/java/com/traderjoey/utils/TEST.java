@@ -6,4 +6,5 @@ public class TEST {
 	//FIXME can
     //TODO fan
     // 这是一个测试编码的文件
+	// 这句话编码为GBK
 }
