@@ -7,4 +7,5 @@ public class TEST {
     //TODO fan
     // 这是一个测试编码的文件
 	// 这句话编码为GBK
+    // 这句话编码为UTF-8
 }
