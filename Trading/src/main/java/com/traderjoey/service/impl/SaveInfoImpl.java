@@ -1,14 +1,16 @@
 package com.traderjoey.service.impl;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.traderjoey.bean.CurrencyPrice;
+
+import com.traderjoey.dao.impl.CurrencyPricesDAOImpl;
 import com.traderjoey.dto.RequestUrl;
 import com.traderjoey.exception.EmptyHttpResponseException;
 import com.traderjoey.utils.Key;
@@ -25,14 +27,19 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 		if (!StringUtils.isBlank(responseString)) {
 			ObjectMapper mapper = new ObjectMapper();
 			CurrencyPrice[] currencyPrices = mapper.readValue(responseString, CurrencyPrice[].class);
-			System.out.println(currencyPrices[0]);
-			System.out.println(currencyPrices[1]);
 			for (CurrencyPrice currencyPrice : currencyPrices) {
-				
+				currencyPrice.setTimestamp(new Timestamp(System.currentTimeMillis()));
 			}
-			for (Symbol symbol : Symbol.values()) {
 
+			List<CurrencyPrice> list = new ArrayList<CurrencyPrice>();
+			for (Symbol symbol : Symbol.values()) {
+				for (int i = 0; i < currencyPrices.length; i++) {
+					if (currencyPrices[i].getCurrency().equals(symbol.toString())) {
+						list.add(currencyPrices[i]);
+					}
+				}
 			}
+			new CurrencyPricesDAOImpl().addAll(list);
 
 		} else {
 			throw new EmptyHttpResponseException();

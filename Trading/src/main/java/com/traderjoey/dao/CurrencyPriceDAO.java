@@ -40,17 +40,30 @@ public interface CurrencyPriceDAO {
 	 */
 	public List<CurrencyPrice> list(Currency currency, Timestamp end, int count);
 
+	
 	/**
-	 * 存储数据时使用,重要方法,也可调试用,插入一个伪造的currency,应具timestamp备查重功能,若有重复,抛出自定义异常
-	 * 
+	 * 存储数据时使用,重要方法,也可调试用,可用来插入一个伪造的currency,注意2点:
+	 * 1.应具备timestamp查重功能,若有重复,抛出自定义异常
+	 * 2.我们要在数据库上实现id自增,所以传过来的id默认为null
 	 * @param currency
 	 */
 	public void add(CurrencyPrice currencyPrice);
+	
+	
+	/**
+	 * 不同于上一个,此方法是一次传多个进来,用于在实际运行时使用,数据的样子见googledocs,仍注意2点:
+	 * 1.应具备timestamp查重功能,若有重复,抛出自定义异常
+	 * 2.我们要在数据库上实现id自增,所以传过来的id默认为null
+	 * @param list
+	 */
+	public void addAll(List<CurrencyPrice> list);
 	
 	/**
 	 * 删除指定货币的所有价格记录
 	 * @param currency
 	 */
+	
+	
 	public void delete(Currency currency);
 
 	/**

@@ -52,4 +52,10 @@ public class CurrencyPricesDAOImpl implements CurrencyPriceDAO{
 		
 	}
 
+	@Override
+	public void addAll(List<CurrencyPrice> list) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
