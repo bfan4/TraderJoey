@@ -4,7 +4,7 @@ package com.traderjoey.bean;
 public class Currency {
 	private int id;
 	private String name;
-	private CurrencyPrice price;
+	private String currentPrice;
 
 	public int getId() {
 		return id;

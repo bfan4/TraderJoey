@@ -26,7 +26,8 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 	}
 
 	@Override
-	public void get(Currency currency) {
+	public int get(Currency currency) {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
@@ -35,6 +36,12 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 	public void setMostRecentPrice(CurrencyPrice currencyPrice) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public CurrencyPrice getMostRecentPrice(Currency currency) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
