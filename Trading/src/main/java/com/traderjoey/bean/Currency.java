@@ -22,12 +22,12 @@ public class Currency {
 		this.name = name;
 	}
 
-	public CurrencyPrice getPrice() {
-		return price;
+	public String getPrice() {
+		return currentPrice;
 	}
 
-	public void setPrice(CurrencyPrice price) {
-		this.price = price;
+	public void setPrice(String price) {
+		this.currentPrice = price;
 	}
 
 }
