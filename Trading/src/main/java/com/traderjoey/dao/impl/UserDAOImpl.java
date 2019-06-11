@@ -7,8 +7,9 @@ import com.traderjoey.dao.UserDAO;
 public class UserDAOImpl implements UserDAO{
 
 	@Override
-	public void add(User bean) {
+	public boolean add(User bean) {
 		// TODO Auto-generated method stub
+		return false;
 		
 	}
 

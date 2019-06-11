@@ -3,7 +3,7 @@ package com.traderjoey.bean;
 import java.sql.Timestamp;
 
 public class CurrencyPrice {
-	private Long id = null;
+	private Long id = null; //这里的id一定要设置成数据库自增
 	private String currency;
 	private String price;
 	private Timestamp timestamp;

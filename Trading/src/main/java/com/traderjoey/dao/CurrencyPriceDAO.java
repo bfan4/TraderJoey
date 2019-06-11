@@ -42,9 +42,10 @@ public interface CurrencyPriceDAO {
 
 	
 	/**
-	 * 存储数据时使用,重要方法,也可调试用,可用来插入一个伪造的currency,注意2点:
-	 * 1.应具备timestamp查重功能,若有重复,抛出自定义异常
+	 * 调试用,可用来插入一个伪造的currency,注意2点:
+	 * 1.应具备timestamp查重功能,若有重复,覆盖并在console里面打出来,说明有重复
 	 * 2.我们要在数据库上实现id自增,所以传过来的id默认为null
+	 * 3.不仅要在它的CurrencyPricesXXX表里面插,而且要在Currency表上做更新
 	 * @param currency
 	 */
 	public void add(CurrencyPrice currencyPrice);
@@ -52,8 +53,9 @@ public interface CurrencyPriceDAO {
 	
 	/**
 	 * 不同于上一个,此方法是一次传多个进来,用于在实际运行时使用,数据的样子见googledocs,仍注意2点:
-	 * 1.应具备timestamp查重功能,若有重复,抛出自定义异常
+	 * 1.应具备timestamp查重功能,若有重复,覆盖并在console里面打出来,说明有重复
 	 * 2.我们要在数据库上实现id自增,所以传过来的id默认为null
+	 * 3.这个list里面是10支货币,不仅要在相应的CurrencyPricesXXX表里面各插一份,而且要在Currency表上做更新
 	 * @param list
 	 */
 	public void addAll(List<CurrencyPrice> list);
