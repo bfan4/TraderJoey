@@ -2,10 +2,15 @@ package com.traderjoey.servlet;
 
 import java.io.IOException;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.traderjoey.bean.User;
+import com.traderjoey.dao.impl.UserDAOImpl;
 
 /**
  * 定两个测试用户,后续和数据库连接后,再取真正的用户来检查:
@@ -16,13 +21,33 @@ import javax.servlet.http.HttpServletResponse;
  * 1.若index.jsp传过来的用户名密码不匹配测试用户,则回到index.jsp
  * 2.若用户名密码匹配测试用户,则客户端跳转到fan已做的k线图:query.jsp
  * 
- * @author lican
- *
+ * @author Bruce
+ * FIXME fan already done
  */
+@WebServlet(name = "UserLoginServlet")
 public class LoginServlet extends HttpServlet{
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// FIXME fan
-		super.doPost(req, resp);
-	}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        User user = new UserDAOImpl().get(name, password);
+        if(null != user) {
+            req.getSession().setAttribute("user", user);
+            resp.sendRedirect("showDashboard");
+        }else {
+            resp.sendRedirect("index.jsp");
+        }
+        
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
