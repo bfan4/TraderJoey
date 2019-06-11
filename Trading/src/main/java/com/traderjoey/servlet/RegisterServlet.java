@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.traderjoey.bean.User;
+import com.traderjoey.dao.impl.UserDAOImpl;
+
 public class RegisterServlet extends HttpServlet {
     @Override
     /**
@@ -26,23 +29,21 @@ public class RegisterServlet extends HttpServlet {
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-
+        User user = new User();
+        UserDAOImpl userDAOImpl = new UserDAOImpl();
+        
         try {
-            Class.forName("** DB Driver **");
-            Connection con = DriverManager.getConnection("** SQLConection **");
-
-            PreparedStatement ps = con.prepareStatement("** SQ Language **");
-
-            ps.setString(1, username);
-            ps.setString(2, password);
-
-            int i = ps.executeUpdate();
-            if (i > 0) {
+            user.setName(username);
+            user.setPassword(password);
+            boolean i = userDAOImpl.add(user);
+            
+            if (i == true) {
                 out.print("You are successfully registered...");
                 resp.sendRedirect("login");
             }
-                
-
+            out.print("Registered failed...");
+            resp.sendRedirect("register");
+            
         } catch (Exception e2) {
             System.out.println(e2);
         }
