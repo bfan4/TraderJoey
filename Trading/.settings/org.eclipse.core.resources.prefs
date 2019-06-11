@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
+encoding//WebContent/query.jsp=UTF-8
 encoding//src/main/java=UTF-8
 encoding//src/main/java/com/traderjoey/dao/CurrencyDAO.java=GBK
-encoding//src/main/java/com/traderjoey/dao/CurrencyPricesDAO.java=GBK
-encoding//src/main/java/com/traderjoey/utils/TEST.java=GBK
+encoding//src/main/java/com/traderjoey/dao/CurrencyPriceDAO.java=GBK
+encoding//src/main/java/com/traderjoey/filter/CheckLoginFilter.java=GBK
 encoding//src/test/java=UTF-8

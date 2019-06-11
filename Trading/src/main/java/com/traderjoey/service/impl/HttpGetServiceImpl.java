@@ -7,27 +7,31 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 import com.traderjoey.dto.RequestUrl;
-import com.traderjoey.dto.ResponseInfo;
 
+public class HttpGetServiceImpl {
+	protected RequestUrl url;
+	protected CloseableHttpClient client = HttpClients.createDefault();
+	protected String responseString;
 
-public class HttpGetServiceImpl{
-	RequestUrl url;
-	ResponseInfo response;
-	CloseableHttpClient client = HttpClients.createDefault();
-	HttpEntity entity = null;
+	public HttpGetServiceImpl() {
 
-	public HttpGetServiceImpl(RequestUrl url) {
-		super();
+	}
+
+	public HttpGetServiceImpl(RequestUrl url) throws IOException {
 		this.url = url;
 		try {
 			HttpGet httpGet = new HttpGet(url.urlString);
 			CloseableHttpResponse response = client.execute(httpGet);
 			HttpEntity entity = response.getEntity();
-			this.entity = entity;
+			responseString = EntityUtils.toString(entity);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			client.close();
 		}
 	}
 }

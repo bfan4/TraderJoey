@@ -5,10 +5,10 @@ import java.util.List;
 
 import com.traderjoey.bean.Currency;
 import com.traderjoey.bean.CurrencyPrice;
-import com.traderjoey.dao.CurrencyPricesDAO;
+import com.traderjoey.dao.CurrencyPriceDAO;
 
 //FIXME chen
-public class CurrencyPricesDAOImpl implements CurrencyPricesDAO{
+public class CurrencyPricesDAOImpl implements CurrencyPriceDAO{
 
 	@Override
 	public int getTotal() {

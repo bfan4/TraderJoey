@@ -6,7 +6,7 @@ import java.util.List;
 import com.traderjoey.bean.Currency;
 import com.traderjoey.bean.CurrencyPrice;
 
-public interface CurrencyPricesDAO {
+public interface CurrencyPriceDAO {
 
 	/**
 	 * 调试时使用,看看现在数据库里面一共有多少个价格条目
