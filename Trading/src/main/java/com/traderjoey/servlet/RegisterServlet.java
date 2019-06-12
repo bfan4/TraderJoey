@@ -38,12 +38,19 @@ public class RegisterServlet extends HttpServlet {
             boolean i = userDAOImpl.add(user);
             
             if (i == true) {
+<<<<<<< HEAD
                 
                 //System.out.println("success");
                 resp.sendRedirect("login");
             }
             
             //System.out.println("failed");
+=======
+                out.print("You are successfully registered...");
+                resp.sendRedirect("login");
+            }
+            out.print("Registered failed...");
+>>>>>>> master
             resp.sendRedirect("register");
             
         } catch (Exception e2) {
@@ -52,4 +59,8 @@ public class RegisterServlet extends HttpServlet {
 
         out.close();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
