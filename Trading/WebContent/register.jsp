@@ -55,9 +55,9 @@
 	<div class="row">
 		<div class="col col-lg-4" style="height: auto;"></div>
 		<div class="col col-lg-4" style="height: 575px;">
-
+            <!-- onSubmit="return checkPassword(this)" -->
 			<!-- Sign up form -->
-			<form action="Register" onSubmit="return checkPassword(this)">
+			<form action="RegisterServlet"  method="POST">
 				<div class="form-group">
 					<label>Your User name</label> <input class="form-control"
 						name="username" placeholder="Choice your own user name"> <small

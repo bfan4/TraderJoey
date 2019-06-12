@@ -27,7 +27,7 @@ import com.traderjoey.dao.impl.UserDAOImpl;
 @WebServlet(name = "UserLoginServlet")
 public class LoginServlet extends HttpServlet{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         User user = new UserDAOImpl().get(name, password);

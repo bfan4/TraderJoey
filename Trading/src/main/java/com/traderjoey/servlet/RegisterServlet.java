@@ -18,9 +18,9 @@ public class RegisterServlet extends HttpServlet {
      * 2.注册失败之后也要弹框提示用户,仍然跳转回register.jsp 
      * FIXME fan ready for debug
      */
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO Auto-generated method stub
-
+        System.out.println("HERE");
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
 
@@ -36,12 +36,13 @@ public class RegisterServlet extends HttpServlet {
             
             if (i == true) {
                 
-                //System.out.println("success");
-                resp.sendRedirect("login");
-            }
+                System.out.println("success");
+                resp.sendRedirect("login.jsp");
+            }else {
             
-            //System.out.println("failed");
-            resp.sendRedirect("register");
+            System.out.println("failed");
+            resp.sendRedirect("register.jsp");
+            }
             
         } catch (Exception e2) {
             System.out.println(e2);
