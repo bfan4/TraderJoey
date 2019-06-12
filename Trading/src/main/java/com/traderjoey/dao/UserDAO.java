@@ -9,7 +9,7 @@ public interface UserDAO {
 	 * 在这里不要忘记设置初始balance为100,000刀
 	 * @param bean
 	 */
-	public boolean add(User bean);
+	public boolean add(User theUser);
 
 	/**
 	 * 给前端判断用户是否已经存在的操作
@@ -31,6 +31,6 @@ public interface UserDAO {
 	 * @param password
 	 * @return
 	 */
-	public User get(String name, String password);
+	public User verify(String name, String password);
 
 }

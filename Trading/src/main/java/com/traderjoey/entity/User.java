@@ -25,6 +25,10 @@ public class User {
 	@Column(name="balance")
 	private float balance;
 	
+	public User() {
+		super();
+		this.balance = 100000;
+	}
 	public int getId() {
 		return id;
 	}

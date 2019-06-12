@@ -1,19 +1,20 @@
 package com.traderjoey.dao.impl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.traderjoey.entity.User;
 import com.traderjoey.dao.UserDAO;
-import org.springframework.transaction.annotation.Transactional;
 
 
 //FIXME chen implemented
@@ -21,45 +22,37 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class UserDAOImpl implements UserDAO{
 	
-    private EntityManager entityManager;
-
-    @Autowired
-    public UserDAOImpl(EntityManager theEntityManager){
-	   entityManager = theEntityManager;
-    }
+	@Autowired
+	private SessionFactory sessionFactory;
     
 	@Override
-	@Transactional
 	public boolean add(User theUser) {
-		if(this.isExist(theUser.getName())) return false;
-		
-		Session currentSession = entityManager.unwrap(Session.class);
-		int record = (int) currentSession.save(theUser);		
-		if(record != 0) return true;		
-		return false;		
+		if(isExist(theUser.getName())) return false;
+		Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.save(theUser);
+		return true;		
 	}
 
 	@Override
-	@Transactional
 	public boolean isExist(String name) {
 		if(this.get(name) == null) return true;
 		return false;
 	}
 
 	@Override
-	@Transactional
 	public User get(String name) {
-		Session currentSession = entityManager.unwrap(Session.class);
-		Criteria criteria = currentSession.createCriteria(User.class);
-		User theUser = (User) criteria.add(Restrictions.eq("name", name)).uniqueResult();
-		return theUser;
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM USER s WHERE s.name = :name");
+        query.setParameter("name", name);
+		return (User) query.uniqueResult();
 	}
 
 	@Override
-	@Transactional
-	public User get(String name, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User verify(String name, String password) {
+        Query<User> query = sessionFactory.getCurrentSession().createQuery("FROM USER s WHERE s.name = :name AND s.password = :password");
+        query.setParameter("name", name);
+        query.setParameter("password", password);
+		return (User) query.uniqueResult();
 	}
+	
 
 }
