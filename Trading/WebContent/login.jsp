@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Log in</title>
 </head>
+
 <body>
 	<div class="row">
         <div class="col col-lg-12" style="height: 200px;"></div>
