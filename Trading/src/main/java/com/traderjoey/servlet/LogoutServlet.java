@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 /**
  * 退出当前登录,使当前用户为空
- * FIXME fan already done
+ * FIXME fan ready for debug
  * @author Bruce
  *
  */

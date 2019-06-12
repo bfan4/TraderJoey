@@ -1,17 +1,13 @@
 
 <%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%> --%>
-
-
-
 <!DOCTYPE html>
-<!-- FIXME fan 
+<!-- FIXME fan ready for debug
     本页面的需求:
     1.要有确认密码的功能,两次输入密码不一致要提示
     2.参数post给RegisterServlet-->
 <html>
 <head>
-
 <meta charset="utf-8">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -63,15 +59,13 @@
 			<!-- Sign up form -->
 			<form action="Register" onSubmit="return checkPassword(this)">
 				<div class="form-group">
-					<label>Your User name</label> 
-					<input class="form-control"
+					<label>Your User name</label> <input class="form-control"
 						name="username" placeholder="Choice your own user name"> <small
 						id="usernamehelp" class="form-text text-muted">You may
 						user your email as your user name</small>
 				</div>
 				<div class="form-group">
-					<label>Password</label> 
-					<input type="password" class="form-control"
+					<label>Password</label> <input type="password" class="form-control"
 						name="password" placeholder="Password"> <small
 						id="usernamehelp" class="form-text text-muted"> <span>Be
 							a minimum of eight (8) characters in length;</span><br> <span>Contain
@@ -82,9 +76,9 @@
 					</small>
 				</div>
 				<div class="form-group">
-					<label>Please confirm your password</label> 
-					<input type="password" class="form-control" name="checkpassword" 
-					placeholder="Comfirm Password">
+					<label>Please confirm your password</label> <input type="password"
+						class="form-control" name="checkpassword"
+						placeholder="Comfirm Password">
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
@@ -99,8 +93,6 @@
 		<div class="col col-lg-12"
 			style="height: 50px; background-color: black"></div>
 	</div>
-
-    
 
 
 
