@@ -2,9 +2,6 @@ package com.traderjoey.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +18,7 @@ public class RegisterServlet extends HttpServlet {
      * 2.注册失败之后也要弹框提示用户,仍然跳转回register.jsp 
      * FIXME fan already done
      */
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO Auto-generated method stub
 
         resp.setContentType("text/html");
