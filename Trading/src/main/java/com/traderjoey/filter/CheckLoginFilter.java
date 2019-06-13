@@ -28,11 +28,11 @@ public class CheckLoginFilter implements Filter{
      */
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
-        // FIXME fan already done
+        // FIXME fan ready for debug
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpSession session = request.getSession(false);
-        String loginURI = request.getContextPath() + "/login";
+        String loginURI = request.getContextPath() + "/login.jsp";
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);

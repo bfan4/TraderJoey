@@ -22,12 +22,12 @@ import com.traderjoey.dao.impl.UserDAOImpl;
  * 2.若用户名密码匹配测试用户,则客户端跳转到fan已做的k线图:query.jsp
  * 
  * @author Bruce
- * FIXME fan already done
+ * FIXME fan ready for debug
  */
 @WebServlet(name = "UserLoginServlet")
 public class LoginServlet extends HttpServlet{
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         User user = new UserDAOImpl().verify(name, password);

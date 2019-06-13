@@ -36,12 +36,13 @@ public class Currency {
 		this.name = name;
 	}
 
-	public String getCurrentPrice() {
+	public String getPrice() {
 		return currentPrice;
 	}
 
-	public void setCurrentPrice(String currentPrice) {
-		this.currentPrice = currentPrice;
+
+	public void setPrice(String price) {
+		this.currentPrice = price;
 	}
 
 
