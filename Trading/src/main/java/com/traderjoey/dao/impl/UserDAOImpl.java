@@ -1,15 +1,8 @@
 package com.traderjoey.dao.impl;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,36 +15,50 @@ import com.traderjoey.dao.UserDAO;
 @Repository
 public class UserDAOImpl implements UserDAO{
 	
+	// define field for entitymanager
 	@Autowired
-	private SessionFactory sessionFactory;
+	private EntityManager entityManager;
+		
+	// set up constructor injection
+	
+	public UserDAOImpl() {
+	}
     
 	@Override
-	public boolean add(User theUser) {
-		if(isExist(theUser.getName())) return false;
-		Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(theUser);
-		return true;		
+	public boolean add(User theUser) { 
+		Session session = entityManager.unwrap(Session.class);
+		Query theQuery = session.createQuery("FROM USER s WHERE s.name = :name");
+		theQuery.setParameter("name", theUser.getName());
+		if(theQuery.uniqueResult() != null) return false;
+		theUser.setId(0);
+        User flag = (User) session.save(theUser);
+		return flag!=null;	
 	}
 
 	@Override
 	public boolean isExist(String name) {
-		if(this.get(name) == null) return true;
-		return false;
+		Session session = entityManager.unwrap(Session.class);
+		Query theQuery = session.createQuery("FROM USER s WHERE s.name = :name");
+		theQuery.setParameter("name", name);
+		if(theQuery.uniqueResult() == null) return false;
+		return true;
 	}
 
 	@Override
 	public User get(String name) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM USER s WHERE s.name = :name");
-        query.setParameter("name", name);
-		return (User) query.uniqueResult();
+		Session session = entityManager.unwrap(Session.class);
+		Query theQuery = session.createQuery("FROM USER s WHERE s.name = :name");
+		theQuery.setParameter("name", name);
+		return (User) theQuery.uniqueResult();
 	}
 
 	@Override
 	public User verify(String name, String password) {
-        Query<User> query = sessionFactory.getCurrentSession().createQuery("FROM USER s WHERE s.name = :name AND s.password = :password");
-        query.setParameter("name", name);
-        query.setParameter("password", password);
-		return (User) query.uniqueResult();
+		Session session = entityManager.unwrap(Session.class);
+		Query theQuery = session.createQuery("FROM USER s WHERE s.name = :name AND s.password = :password");
+		theQuery.setParameter("name", name);
+        theQuery.setParameter("password", password);
+        return (User) theQuery.uniqueResult();
 	}
 	
 

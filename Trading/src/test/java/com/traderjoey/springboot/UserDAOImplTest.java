@@ -1,4 +1,4 @@
-package com.traderjoey.dao.impl;
+package com.traderjoey.springboot;
 
 import javax.persistence.EntityManager;
 
@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 
 import com.traderjoey.bean.Currency;
+import com.traderjoey.dao.impl.UserDAOImpl;
 import com.traderjoey.entity.User;
 
 @RunWith(SpringRunner.class)
