@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
@@ -17,9 +18,11 @@ import static org.junit.Assert.*;
 import com.traderjoey.bean.Currency;
 import com.traderjoey.dao.impl.UserDAOImpl;
 import com.traderjoey.entity.User;
+import com.traderjoey.springConf.AppConf;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ContextConfiguration(classes = {AppConf.class})
 public class UserDAOImplTest {
 	@Autowired
 	private TestEntityManager entityManager;

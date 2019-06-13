@@ -15,7 +15,7 @@ import com.traderjoey.dao.UserDAO;
 @Repository
 public class UserDAOImpl implements UserDAO{
 	
-	// define field for entitymanager
+	// define field for entity manager
 	@Autowired
 	private EntityManager entityManager;
 		
