@@ -1,6 +1,6 @@
 package com.traderjoey.dao;
 
-import com.traderjoey.bean.User;
+import com.traderjoey.entity.User;
 
 public interface UserDAO {
 	/**
@@ -30,6 +30,6 @@ public interface UserDAO {
 	 * @param password
 	 * @return
 	 */
-	public User get(String name, String password);
+	public User verify(String name, String password);
 
 }

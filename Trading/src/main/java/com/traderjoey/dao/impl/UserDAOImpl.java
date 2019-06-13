@@ -1,34 +1,166 @@
 package com.traderjoey.dao.impl;
 
-import com.traderjoey.bean.User;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.traderjoey.entity.User;
 import com.traderjoey.dao.UserDAO;
 
 //FIXME chen
 public class UserDAOImpl implements UserDAO{
-
+	
 	@Override
-	public boolean add(User bean) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean add(User theUser) {
+		// create session factory
+		SessionFactory factory = new Configuration()
+								.configure("hibernate.cfg.xml")
+								.addAnnotatedClass(User.class)
+								.buildSessionFactory();
 		
+		// create session
+		Session session = factory.getCurrentSession();
+		
+		try {			
+			// set ID
+			theUser.setId(0);
+			System.out.println(theUser);
+			
+			// start a transaction
+			session.beginTransaction();
+			
+			// save the student object
+			System.out.println("Saving User");
+			session.save(theUser);
+			
+			// commit transaction
+			session.getTransaction().commit();
+			
+			System.out.println("Done!");
+			
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+		finally {
+            session.flush();
+            session.close();
+			factory.close();
+		}
 	}
 
 	@Override
 	public boolean isExist(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		// create session factory
+		SessionFactory factory = new Configuration()
+								.configure("hibernate.cfg.xml")
+								.addAnnotatedClass(User.class)
+								.buildSessionFactory();
+		
+		// create session
+		Session session = factory.getCurrentSession();
+		
+		try {			
+			System.out.println("looking for " + name);			
+			// start a transaction
+			session.beginTransaction();
+			
+			// query
+			String hql = "FROM USER U WHERE U.name = :name";
+			Query<User> query = session.createQuery(hql);
+			query.setParameter(0, name);
+			User theUser = query.uniqueResult();
+			
+			// commit transaction
+			session.getTransaction().commit();
+			
+			if(theUser != null) return true;
+			return false;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		finally {
+            session.flush();
+            session.close();
+			factory.close();
+		}
 	}
 
 	@Override
 	public User get(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		// create session factory
+		SessionFactory factory = new Configuration()
+								.configure("hibernate.cfg.xml")
+								.addAnnotatedClass(User.class)
+								.buildSessionFactory();
+		
+		// create session
+		Session session = factory.getCurrentSession();
+		
+		try {			
+			System.out.println("looking for " + name);			
+			// start a transaction
+			session.beginTransaction();
+			
+			// query
+			String hql = "FROM USER U WHERE U.name = :name";
+			Query<User> query = session.createQuery(hql);
+			query.setParameter(0, name);
+			User theUser = query.uniqueResult();
+			
+			// commit transaction
+			session.getTransaction().commit();
+			
+			return theUser;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		finally {
+            session.flush();
+            session.close();
+			factory.close();
+		}
 	}
 
 	@Override
-	public User get(String name, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public User verify(String name, String password) {
+		// create session factory
+		SessionFactory factory = new Configuration()
+								.configure("hibernate.cfg.xml")
+								.addAnnotatedClass(User.class)
+								.buildSessionFactory();
+		
+		// create session
+		Session session = factory.getCurrentSession();
+		
+		try {			
+			System.out.println("looking for " + name);			
+			// start a transaction
+			session.beginTransaction();
+			
+			// query
+			String hql = "FROM USER U WHERE U.name = :name AND u.password";
+			Query<User> query = session.createQuery(hql);
+			query.setParameter(0, name);
+			query.setParameter(1,password);
+			User theUser = query.uniqueResult();
+			
+			// commit transaction
+			session.getTransaction().commit();
+			return theUser;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		finally {
+            session.flush();
+            session.close();
+			factory.close();
+		}
 	}
 
 }
