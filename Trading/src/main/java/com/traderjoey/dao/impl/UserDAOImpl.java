@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO{
 		Session session = factory.getCurrentSession();
 		
 		try {			
-			// set ID
+			// reset ID
 			theUser.setId(0);
 			System.out.println(theUser);
 			
@@ -45,8 +45,6 @@ public class UserDAOImpl implements UserDAO{
 			return false;
 		}
 		finally {
-            session.flush();
-            session.close();
 			factory.close();
 		}
 	}
@@ -68,10 +66,10 @@ public class UserDAOImpl implements UserDAO{
 			session.beginTransaction();
 			
 			// query
-			String hql = "FROM USER U WHERE U.name = :name";
+			String hql = "FROM User u WHERE u.name = :name";
 			Query<User> query = session.createQuery(hql);
-			query.setParameter(0, name);
-			User theUser = query.uniqueResult();
+			query.setParameter("name", name);
+			User theUser = (User)query.uniqueResult();
 			
 			// commit transaction
 			session.getTransaction().commit();
@@ -83,8 +81,6 @@ public class UserDAOImpl implements UserDAO{
 			throw e;
 		}
 		finally {
-            session.flush();
-            session.close();
 			factory.close();
 		}
 	}
@@ -106,9 +102,9 @@ public class UserDAOImpl implements UserDAO{
 			session.beginTransaction();
 			
 			// query
-			String hql = "FROM USER U WHERE U.name = :name";
+			String hql = "FROM User U WHERE U.name = :name";
 			Query<User> query = session.createQuery(hql);
-			query.setParameter(0, name);
+			query.setParameter("name", name);
 			User theUser = query.uniqueResult();
 			
 			// commit transaction
@@ -120,8 +116,6 @@ public class UserDAOImpl implements UserDAO{
 			throw e;
 		}
 		finally {
-            session.flush();
-            session.close();
 			factory.close();
 		}
 	}
@@ -143,7 +137,7 @@ public class UserDAOImpl implements UserDAO{
 			session.beginTransaction();
 			
 			// query
-			String hql = "FROM USER U WHERE U.name = :name AND u.password";
+			String hql = "FROM User U WHERE U.name = :name AND u.password";
 			Query<User> query = session.createQuery(hql);
 			query.setParameter(0, name);
 			query.setParameter(1,password);
@@ -157,8 +151,6 @@ public class UserDAOImpl implements UserDAO{
 			throw e;
 		}
 		finally {
-            session.flush();
-            session.close();
 			factory.close();
 		}
 	}

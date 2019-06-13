@@ -25,6 +25,9 @@ public class User {
 	@Column(name="balance")
 	private float balance;
 	
+	public User() {
+		super();
+	}
 	public User(String name, String password) {
 		super();
 		this.name = name;
