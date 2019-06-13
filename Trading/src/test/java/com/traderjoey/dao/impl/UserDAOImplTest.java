@@ -17,23 +17,23 @@ public class UserDAOImplTest {
 	User user4 = new User("four", "four");
 	User user5 = new User("five", "five");
 	User user6 = new User("six", "six");
-	
+	UserDAOImpl up =  new UserDAOImpl();
 	
 	
 	@Test
 	public void testAdd() throws Exception {
-		assertTrue(new UserDAOImpl().add(user2));
+		assertTrue(up.add(user2));
 	}
+//	
+//	@Test
+//	public void testIsExist() throws Exception {
+//		assertTrue(new UserDAOImpl().isExist("one"));
+//	}
 	
 	@Test
-	public void testIsExist() throws Exception {
-		assertTrue(new UserDAOImpl().isExist("one"));
-	}
-	
-	@Test
-	public void test() throws Exception {
+	public void testVerify() throws Exception {
 		user1_1.setId(1);
-		assertEquals(user1_1,new UserDAOImpl().get("one"));
+		assertEquals(user1,new UserDAOImpl().verify("two","two"));
 	}	
 	
 }

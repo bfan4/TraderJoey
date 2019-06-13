@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO{
 			
 			// query
 			String hql = "FROM User u WHERE u.name = :name";
-			Query<User> query = session.createQuery(hql);
+			Query query = session.createQuery(hql);
 			query.setParameter("name", name);
 			User theUser = (User)query.uniqueResult();
 			
@@ -103,9 +103,9 @@ public class UserDAOImpl implements UserDAO{
 			
 			// query
 			String hql = "FROM User U WHERE U.name = :name";
-			Query<User> query = session.createQuery(hql);
+			Query query = session.createQuery(hql);
 			query.setParameter("name", name);
-			User theUser = query.uniqueResult();
+			User theUser = (User)query.uniqueResult();
 			
 			// commit transaction
 			session.getTransaction().commit();
@@ -132,16 +132,17 @@ public class UserDAOImpl implements UserDAO{
 		Session session = factory.getCurrentSession();
 		
 		try {			
-			System.out.println("looking for " + name);			
+			System.out.println("verifyling for " + name);			
 			// start a transaction
 			session.beginTransaction();
 			
 			// query
-			String hql = "FROM User U WHERE U.name = :name AND u.password";
-			Query<User> query = session.createQuery(hql);
-			query.setParameter(0, name);
-			query.setParameter(1,password);
-			User theUser = query.uniqueResult();
+			String hql = "FROM User U WHERE U.name = :name AND U.password = :password";
+			Query query = session.createQuery(hql);
+			query.setParameter("name", name);
+			query.setParameter("password", password);
+			if(query.uniqueResult() == null) return null;
+			User theUser = (User)query.uniqueResult();
 			
 			// commit transaction
 			session.getTransaction().commit();

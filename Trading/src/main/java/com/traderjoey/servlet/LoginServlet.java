@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.traderjoey.bean.User;
+import com.traderjoey.entity.User;
 import com.traderjoey.dao.impl.UserDAOImpl;
 
 /**
@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        User user = new UserDAOImpl().get(name, password);
+        User user = new UserDAOImpl().verify(name, password);
         if(null != user) {
             req.getSession().setAttribute("user", user);
             resp.sendRedirect("showDashboard");

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.traderjoey.bean.User;
 import com.traderjoey.dao.impl.UserDAOImpl;
+import com.traderjoey.entity.User;
 
 public class RegisterServlet extends HttpServlet {
     @Override
@@ -33,6 +33,8 @@ public class RegisterServlet extends HttpServlet {
             user.setName(username);
             user.setPassword(password);
             boolean i = userDAOImpl.add(user);
+            System.out.println("second");
+
             
             if (i == true) {
                 
