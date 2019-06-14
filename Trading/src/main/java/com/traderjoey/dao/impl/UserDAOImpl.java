@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO{
 			// start a transaction
 			session.beginTransaction();
 			
-			// save the student object
+			// save the user object
 			System.out.println("Saving User");
 			session.save(theUser);
 			

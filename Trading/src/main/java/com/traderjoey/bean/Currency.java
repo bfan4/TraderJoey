@@ -4,7 +4,7 @@ package com.traderjoey.bean;
 public class Currency {
 	private int id;
 	private String name;
-	private String currentPrice;
+	private float currentPrice;
 
 	public int getId() {
 		return id;
@@ -22,11 +22,11 @@ public class Currency {
 		this.name = name;
 	}
 
-	public String getPrice() {
+	public float getPrice() {
 		return currentPrice;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(float price) {
 		this.currentPrice = price;
 	}
 

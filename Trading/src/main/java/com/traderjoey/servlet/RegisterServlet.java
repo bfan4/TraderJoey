@@ -32,9 +32,15 @@ public class RegisterServlet extends HttpServlet {
         try {
             user.setName(username);
             user.setPassword(password);
-            boolean i = userDAOImpl.add(user);
-            System.out.println("second");
+            if(userDAOImpl.isExist(username)) {
+                System.out.println("an existed user");
+                resp.getWriter().println("existed User");
+                resp.getWriter().println("<a href=\" /Trading/register.jsp \">Go back !</a>\r\n" + 
+                		"");
+                return ;
+            }
 
+            boolean i = userDAOImpl.add(user);
             
             if (i == true) {
                 
