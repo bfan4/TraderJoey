@@ -24,8 +24,7 @@
 					<input
 						class="form-control" name="name"
 						placeholder="Enter username"> 
-						<small class="form-text text-muted">We'll never
-						share your user name with anyone else.</small>
+						<small class="form-text text-muted"></small>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
