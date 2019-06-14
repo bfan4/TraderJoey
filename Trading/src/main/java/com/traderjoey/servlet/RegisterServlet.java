@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.traderjoey.bean.User;
+import com.traderjoey.entity.User;
 import com.traderjoey.dao.impl.UserDAOImpl;
 
 public class RegisterServlet extends HttpServlet {
@@ -32,15 +32,17 @@ public class RegisterServlet extends HttpServlet {
         try {
             user.setName(username);
             user.setPassword(password);
+            user.setBalance(0.0f);
             boolean i = userDAOImpl.add(user);
-            
+            System.out.println(username);
+            System.out.println(password);
             if (i == true) {
                 
-                System.out.println("success");
+                System.out.println("Registe success");
                 resp.sendRedirect("login.jsp");
             }else {
             
-            System.out.println("failed");
+            System.out.println("Registe failed");
             resp.sendRedirect("register.jsp");
             }
             

@@ -1,14 +1,15 @@
 package com.traderjoey.dao;
 
-import com.traderjoey.bean.User;
+import com.traderjoey.entity.User;
 
 public interface UserDAO {
+	
 	/**
 	 * 给前端注册对象时使用,返回一个boolean给前端判断注册是否成功,true为成功,false为不成功/账号已存在
 	 * 在这里不要忘记设置初始balance为100,000刀
 	 * @param bean
 	 */
-	public boolean add(User bean);
+	public boolean add(User theUser);
 
 	/**
 	 * 给前端判断用户是否已经存在的操作
@@ -30,6 +31,6 @@ public interface UserDAO {
 	 * @param password
 	 * @return
 	 */
-	public User get(String name, String password);
+	public User verify(String name, String password);
 
 }

@@ -13,7 +13,7 @@ public class CurrencyDAOImplTest {
 	@Test
 	public void testGet() throws Exception {
 		System.out.println("hello");
-		assertEquals(1, new CurrencyDAOImpl().get(new Currency()));
+		assertEquals(0, new CurrencyDAOImpl().get(new Currency()));
 	}
 
 }

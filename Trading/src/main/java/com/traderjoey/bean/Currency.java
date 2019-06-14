@@ -1,10 +1,24 @@
 package com.traderjoey.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="currency")
 public class Currency {
+	
+	@Id
+	@Column(name="id")
 	private int id;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="current_price")
 	private String currentPrice;
+
 
 	public int getId() {
 		return id;
@@ -22,12 +36,19 @@ public class Currency {
 		this.name = name;
 	}
 
-	public String getPrice() {
+
+	
+
+	public String getCurrentPrice() {
+
 		return currentPrice;
 	}
 
-	public void setPrice(String price) {
-		this.currentPrice = price;
+
+	public void setCurrentPrice(String currentPrice) {
+		this.currentPrice = currentPrice;
+
 	}
+
 
 }
