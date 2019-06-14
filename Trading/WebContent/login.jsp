@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<label>User name</label> 
 					<input
-						class="form-control" name="username"
+						class="form-control" name="name"
 						placeholder="Enter username"> 
 						<small class="form-text text-muted">We'll never
 						share your user name with anyone else.</small>

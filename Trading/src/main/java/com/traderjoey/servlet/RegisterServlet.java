@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.traderjoey.bean.User;
 import com.traderjoey.dao.impl.UserDAOImpl;
+import com.traderjoey.entity.User;
 
 public class RegisterServlet extends HttpServlet {
     @Override
@@ -32,6 +32,14 @@ public class RegisterServlet extends HttpServlet {
         try {
             user.setName(username);
             user.setPassword(password);
+            if(userDAOImpl.isExist(username)) {
+                System.out.println("an existed user");
+                resp.getWriter().println("existed User");
+                resp.getWriter().println("<a href=\" /Trading/register.jsp \">Go back !</a>\r\n" + 
+                		"");
+                return ;
+            }
+
             boolean i = userDAOImpl.add(user);
             
             if (i == true) {
