@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet{
         User user = new UserDAOImpl().verify(name, password);
         if(null != user) {
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("showDashboard");
+            resp.sendRedirect("index.jsp");
         }else {
             info = "User name or password not correct!";
             req.setAttribute("outputMessage", info);
