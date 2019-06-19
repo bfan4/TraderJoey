@@ -22,7 +22,7 @@ public class UserDAOImplTest {
 	
 	@Test
 	public void testAdd() throws Exception {
-		assertTrue(up.add(user2));
+		assertTrue(up.add(user3));
 	}
 //	
 //	@Test

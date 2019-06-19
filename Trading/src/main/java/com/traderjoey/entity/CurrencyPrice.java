@@ -63,12 +63,4 @@ public class CurrencyPrice {
 		this.currency = currency;
 	}
 
-	@Override
-	public String toString() {
-		return "CurrencyPrice [record=" + record + ", price=" + price + ", timestamp=" + timestamp + ", currency="
-				+ currency + "]";
-	}
-	
-	
-
 }

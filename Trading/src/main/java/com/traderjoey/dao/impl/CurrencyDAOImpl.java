@@ -91,11 +91,10 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 		Session session = factory.openSession();
 		
 		try {														
-			session = factory.getCurrentSession();
 			session.beginTransaction();
 			
 			// update currency information
-			System.out.println("Updating currency information ");
+			System.out.println("Updating currenct price ");
 			Currency theCurrency = (Currency) session.get(Currency.class, id);
 			theCurrency.setCurrentPrice(currentPrice);
 						
@@ -103,7 +102,7 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 			session.getTransaction().commit();
 
 			
-			System.out.println("Done!");
+			System.out.println("Updated!");
 		}
 		finally {
 			session.close();
@@ -117,7 +116,6 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 		// create session
 		Session session = factory.openSession();
 		try {														
-			session = factory.getCurrentSession();
 			session.beginTransaction();
 			
 			// update currency information
@@ -140,31 +138,29 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 
 	@Override
 	public Currency getCurrencyByName(String name) {
-		Currency theCurrency;
+		Currency theCurrency=null;
 
 		// create session
 		Session session = factory.openSession();
 		try {														
-			session = factory.getCurrentSession();
-			session.beginTransaction();
-			
+			session.beginTransaction();			
 			// looking for currency
 			System.out.println("looking for currency");
 			String queryString = "FROM Currency WHERE name = :name";
 			Query query = session.createQuery(queryString);
 			query.setParameter("name", name);
 			theCurrency = (Currency) query.uniqueResult();
+			System.out.println("the currency is # " + theCurrency.getId());
 			session.getTransaction().commit();		
-			System.out.println(theCurrency.getId());
-			return theCurrency;
+			
 		}
 		catch(Exception e) {
 			System.out.println(e);
-			return null;
 		}
 		finally {
 			session.close();
 		}	
+		return theCurrency;
 	}
 
 }
