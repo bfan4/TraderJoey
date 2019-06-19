@@ -108,9 +108,10 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 		
 		try {
 			session.beginTransaction();
-			String queryString = "FROM CurrencyPrice currency_price WHERE currency_id = :id ORDER BY time_stamp DESC";
+			String queryString = "FROM CurrencyPrice currency_price WHERE currency_id = :id AND time_stamp <= :time_stamp ORDER BY time_stamp DESC";
 			Query query = session.createQuery(queryString);
 			query.setParameter("id", id);
+			query.setParameter("time_stamp", end);
 			list = query.list();
 			System.out.println(list);
 	        session.getTransaction().commit();
@@ -150,12 +151,35 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 		return latest;
 	}
 	
+	public float getCurrencyLatestPrice(int id){
+		Session session = factory.openSession();
+		//define the earliest time stamp in mysql
+		String queryString = "FROM CurrencyPrice cp WHERE currency_id = :id ORDER BY time_stamp DESC";
+		float currencyLatestPrice = 0;
+		
+		try{
+			System.out.println("looking for the latest price");
+			Query query = session.createQuery(queryString);
+			query.setParameter("id", id);
+			CurrencyPrice theCurrencyPrice = (CurrencyPrice) query.uniqueResult();
+			currencyLatestPrice = theCurrencyPrice.getPrice();
+			System.out.println("The latest price of " + theCurrencyPrice.getCurrency().getId() + " is " + currencyLatestPrice);
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			}
+		finally {
+			session.close();
+		}
+		return currencyLatestPrice;
+		}
+	
 	@Override
-	public void addOrUpdate(CurrencyPrice currencyPrice) throws Exception {
+ 	public void addOrUpdate(CurrencyPrice currencyPrice) throws Exception {
 
 		// create session
 		Timestamp latest = this.getCurrencyLatestTimestamp(currencyPrice.getCurrency().getId());
-		System.out.println("my latest: " + latest);
+		System.out.println("Currency # " + currencyPrice.getCurrency().getId() + " latest time stamp is: " + latest);
 		Session session = factory.openSession();
 
 		try {		
@@ -187,7 +211,7 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 				System.out.println("Saved record: id = " + currencyPrice.getCurrency().getId() + " and price=" + currencyPrice.getPrice());
 			}
 
-			if(currencyPrice.getTimestamp().after(latest)) {
+			if(!currencyPrice.getTimestamp().before(latest)) {
 				new CurrencyDAOImpl().updateCurrentPrice(currencyPrice.getCurrency().getId(), currencyPrice.getPrice());
 				System.out.println("Update currency price: id=" + currencyPrice.getCurrency().getId() + " and price=" + currencyPrice.getPrice() );
 			}
@@ -209,19 +233,17 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 		// create session
 		Session session = factory.openSession();
 		try {			
-			System.out.println("deleting all currencyPrice of " + currency.getId());
+			System.out.println("Deleting all currencyPrice of " + currency.getId());
 			
 			// start a transaction
 			session.beginTransaction();
-			String queryString = "FROM CurrencyPrice cp WHERE currency_id = :id";
+			String queryString = "DELETE FROM CurrencyPrice cp WHERE currency_id = :id";
 			Query query = session.createQuery(queryString);
 			query.setParameter("id", currency.getId());
-			List<CurrencyPrice> list = query.list();
-			for(CurrencyPrice currencyPrice : list) {
-				session.delete(currencyPrice);
-			}
+			query.executeUpdate();
 			session.getTransaction().commit();
 			System.out.println("Deleted");
+			new CurrencyDAOImpl().updateCurrentPrice(currency.getId(), 0);
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -236,22 +258,18 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 		// create session
 		Session session = factory.openSession();
 		try {			
-			System.out.println("deleting all currencyPrice of " + currency.getId() + "and before " + end);
+			System.out.println("Deleting all currencyPrice of " + currency.getId() + "and before " + end);
 			
 			// start a transaction
 			session.beginTransaction();
-			String queryString = "FROM CurrencyPrice cp WHERE currency_id = :id AND time_stamp < :time_stamp";
+			String queryString = "DELETE FROM CurrencyPrice cp WHERE currency_id = :id AND time_stamp < :time_stamp";
 			Query query = session.createQuery(queryString);
 			query.setParameter("id", currency.getId());
 			query.setParameter("time_stamp", end);			
-			List<CurrencyPrice> list = query.list();
-			int count = 0;
-			for(CurrencyPrice currencyPrice : list) {
-				session.delete(currencyPrice);
-				count++;
-			}
+			query.executeUpdate();
 			session.getTransaction().commit();
-			System.out.println("Deleted " + count +"records");
+			System.out.println("Deleted " + "records");
+			
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -262,42 +280,53 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 	}
 
 	@Override
-	public void addAll(List<CurrencyPrice> list) {
+	public void addOrUpdateAll(List<CurrencyPrice> list) throws Exception {
 		for(CurrencyPrice currencyPrice : list) {
 			Session session = factory.openSession();
-			try {			
+			// create session
+			Timestamp latest = this.getCurrencyLatestTimestamp(currencyPrice.getCurrency().getId());
+			System.out.println("Currency # " + currencyPrice.getCurrency().getId() + " latest time stamp is: " + latest);
+			try {		
 				// reset ID
 				currencyPrice.setRecord(0);
 				System.out.println("saving new currencyPrice");
 				
 				// start a transaction
 				session.beginTransaction();
-	
 				//get the latest currency price record. Update it if needed
-				String queryString = "FROM CurrencyPrice cp WHERE currency_id = :id AND time_stamp = :time_stamp";
+				String queryString = "FROM CurrencyPrice WHERE currency_id = :id AND time_stamp = :time_stamp";
 				Query query = session.createQuery(queryString);
 				query.setParameter("id", currencyPrice.getCurrency().getId());
 				query.setParameter("time_stamp", currencyPrice.getTimestamp());
 				CurrencyPrice theCurrencyPrice = (CurrencyPrice) query.uniqueResult();
 				System.out.println(theCurrencyPrice);
-	
+				
 				if(theCurrencyPrice != null) {
+					System.out.println("Updating exist record");
 					theCurrencyPrice.setPrice(currencyPrice.getPrice());
+					// commit transaction
 					session.getTransaction().commit();
-					System.out.println("update exist record, id = " + currencyPrice.getCurrency().getId() + " time: " + currencyPrice.getTimestamp() );
-					return;
+					System.out.println("Update exist record, id = " + currencyPrice.getCurrency().getId() + " time: " + currencyPrice.getTimestamp() );
 				}
-				session.save(currencyPrice);
+				else {
+					session.save(currencyPrice);
+					// commit transaction
+					session.getTransaction().commit();
+					System.out.println("Saved record: id = " + currencyPrice.getCurrency().getId() + " and price=" + currencyPrice.getPrice());
+				}
+
+				if(!currencyPrice.getTimestamp().before(latest)) {
+					new CurrencyDAOImpl().updateCurrentPrice(currencyPrice.getCurrency().getId(), currencyPrice.getPrice());
+					System.out.println("Update currency price: id=" + currencyPrice.getCurrency().getId() + " and price=" + currencyPrice.getPrice() );
+				}
+
 				
-				// commit transaction
-				session.getTransaction().commit();
-				
-				System.out.println("Done!");
 			}
 			catch(Exception e) {
 				System.out.println(e);
 			}
 			finally {
+				if(session != null)
 				session.close();
 			}
 		}

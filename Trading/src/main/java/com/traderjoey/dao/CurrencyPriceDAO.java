@@ -58,8 +58,9 @@ public interface CurrencyPriceDAO {
 	 * 2.我们要在数据库上实现id自增,所以传过来的id默认为null
 	 * 3.这个list里面是10支货币,不仅要在相应的CurrencyPricesXXX表里面各插一份,而且要在Currency表上做更新
 	 * @param list
+	 * @throws Exception 
 	 */
-	public void addAll(List<CurrencyPrice> list);
+	public void addOrUpdateAll(List<CurrencyPrice> list) throws Exception;
 	
 	/**
 	 * 删除指定货币的所有价格记录
