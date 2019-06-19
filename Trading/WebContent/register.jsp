@@ -89,7 +89,7 @@
 			<div class="card bg-light text-white">
 				<div class="card-body ">
 					<form action="RegisterServlet" method="POST"
-						onSubmit="return checkPassord(this)">
+						onSubmit="return checkPassword(this)">
 						<div class="form-group">
 							<label style="color: black">Your User name</label> <input
 								class="form-control" name="username"

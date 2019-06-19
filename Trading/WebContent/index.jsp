@@ -142,7 +142,7 @@
 
 			<div class="card w-100 shadow-sm bg-white rounded">
 				<div class="card-body" style="text-align: center; padding: 1rem;">
-					<a href="list.jsp">Discover more assets ></a>
+					<a href="prices.jsp">Discover more assets ></a>
 				</div>
 
 			</div>
@@ -226,9 +226,9 @@
 %>
 <%
     String btc_json = loadUtil.readJsonFromUrl(
-					"https://api.nomics.com/v1/candles?key=41627720a6147a36a0bad2ab339d557b&currency=BTC&interval=1d&start=2019-05-16T00%3A00%3A00Z&end=2019-06-16T00%3A00%3A00Z");
+					"https://api.nomics.com/v1/candles?key=41627720a6147a36a0bad2ab339d557b&currency=BTC&interval=1d&start=2019-05-16T00%3A00%3A00Z&end=2019-06-19T00%3A00%3A00Z");
 			String eth_json = loadUtil.readJsonFromUrl(
-					"https://api.nomics.com/v1/candles?key=41627720a6147a36a0bad2ab339d557b&currency=ETH&interval=1d&start=2019-05-16T00%3A00%3A00Z&end=2019-06-16T00%3A00%3A00Z");
+					"https://api.nomics.com/v1/candles?key=41627720a6147a36a0bad2ab339d557b&currency=ETH&interval=1d&start=2019-05-16T00%3A00%3A00Z&end=2019-06-19T00%3A00%3A00Z");
 %>
 <!-- chart ETH -->
 <script>
