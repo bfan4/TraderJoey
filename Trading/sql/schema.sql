@@ -1,5 +1,7 @@
 create database traderjoey;
 
+use traderjoey;
+
 create table user (
 	id int auto_increment,
 	name varchar(20),
@@ -12,7 +14,7 @@ create table user (
 create table currency(
 	id int not null auto_increment,
 	name varchar(20) not null,
-	currenct_price float not null,
+	current_price float not null,
 	primary key(id),
 	constraint name unique (name)
 );
