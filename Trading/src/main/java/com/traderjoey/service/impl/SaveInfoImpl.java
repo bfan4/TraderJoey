@@ -8,9 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.traderjoey.bean.CurrencyPrice;
+import com.traderjoey.entity.CurrencyPrice;
 
-import com.traderjoey.dao.impl.CurrencyPricesDAOImpl;
+import com.traderjoey.dao.impl.CurrencyPriceDAOImpl;
 import com.traderjoey.dto.RequestUrl;
 import com.traderjoey.exception.EmptyHttpResponseException;
 import com.traderjoey.utils.Key;
@@ -23,7 +23,7 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 
 	}
 
-	public void insertInfo() throws EmptyHttpResponseException, JsonParseException, JsonMappingException, IOException {
+	public void insertInfo() throws Exception {
 		if (!StringUtils.isBlank(responseString)) {
 			ObjectMapper mapper = new ObjectMapper();
 			CurrencyPrice[] currencyPrices = mapper.readValue(responseString, CurrencyPrice[].class);
@@ -39,8 +39,8 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 					}
 				}
 			}
-			new CurrencyPricesDAOImpl().addAll(list);
-
+			new CurrencyPriceDAOImpl().addOrUpdateAll(list);
+			
 		} else {
 			throw new EmptyHttpResponseException();
 		}
