@@ -25,13 +25,13 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 
 	public SaveInfoImpl() throws IOException {
 		super(new RequestUrl("https://api.nomics.com/v1/prices?key=" + Key.keyString));
-
 	}
 
 	public void insertInfo() throws Exception {
 		if (!StringUtils.isBlank(responseString)) {
 			ObjectMapper mapper = new ObjectMapper();
 
+			List<CurrencyPrice> cpList = new ArrayList();
 			List<String> nameList = new ArrayList<>();
             JSONArray jsonArray = new JSONArray(responseString);
             for(int i=0;i<jsonArray.length();i++) {
@@ -43,37 +43,21 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 			
 			// currencyPrice.currency is an object rather than a String
 			CurrencyPrice[] currencyPrices = mapper.readValue(responseString, CurrencyPrice[].class);
-			for(CurrencyPrice cp : currencyPrices) {
-				System.out.println(cp.getCurrency());
+			for(int i =0; i < currencyPrices.length; i++) {
+				for(Symbol symbol : Symbol.values()) {
+					if(nameList.get(i).equalsIgnoreCase(symbol.toString())) {
+						currencyPrices[i].setCurrency(new CurrencyDAOImpl().getCurrencyByName(nameList.get(i)));
+						currencyPrices[i].setTimestamp(new Timestamp(System.currentTimeMillis()));
+						System.out.println(currencyPrices[i]);
+						cpList.add(currencyPrices[i]);
+						new CurrencyPriceDAOImpl().addOrUpdate(currencyPrices[i]);
+					}
+				}
 			}
 			
-			
-			
-//			for (int i = 0; i < currencyPrices.length; i++) {
-//				for(Symbol symbol : Symbol.values()) {
-//					if(nameList.get(i).equals(symbol.toString())) {
-//						currencyPrices[i].setCurrency(new CurrencyDAOImpl().getCurrencyByName(nameList.get(i)));
-//						list.add(currencyPrices.)
-//					}
-//					else continue;
-//				}
-//
-//			}
-//
-//			List<CurrencyPrice> list = new ArrayList<CurrencyPrice>();
-//			for (Symbol symbol : Symbol.values()) {
-//				for (int i = 0; i < currencyPrices.length; i++) {
-//					if (currencyPrices[i].getCurrency().getName().equals(symbol.toString())) {
-//						list.add(currencyPrices[i]);
-//					}
-//				}
-//			}
-//			new CurrencyPriceDAOImpl().addOrUpdateAll(list);
-//
-//		} else {
-//			throw new EmptyHttpResponseException();
-//		}
-	}
 
+		} else {
+			throw new EmptyHttpResponseException();
+		}
 	}
-	}
+}

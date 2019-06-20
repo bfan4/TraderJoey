@@ -79,5 +79,10 @@ public class Currency {
 		this.currentPrice = currentPrice;
 	}
 
+	@Override
+	public String toString() {
+		return "Currency [id=" + id + ", name=" + name + ", currentPrice=" + currentPrice + "]";
+	}
+
 
 }

@@ -31,6 +31,12 @@ public class CurrencyPrice {
 	@JoinColumn(name="currency_id")
 	private Currency currency;
 	
+	@Override
+	public String toString() {
+		return "CurrencyPrice [record=" + record + ", price=" + price + ", currency=" + currency.getName() + ", timestamp="
+				+ timestamp + "]";
+	}
+
 	@Column(name="time_stamp")
 	private Timestamp timestamp;
 
