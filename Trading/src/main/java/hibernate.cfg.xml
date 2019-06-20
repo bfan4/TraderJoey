@@ -9,7 +9,8 @@
 
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/traderjoey</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/traderjoey?serverTimezone=UTC</property>
+
         <property name="connection.username">root</property>
         <property name="connection.password">admin</property>
 
@@ -35,5 +36,4 @@
 		
  
     </session-factory>
-
 </hibernate-configuration>

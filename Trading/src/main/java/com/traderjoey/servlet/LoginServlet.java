@@ -30,13 +30,17 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
+        String info = " ";
         User user = new UserDAOImpl().verify(name, password);
         if(null != user) {
             req.getSession().setAttribute("user", user);
-            resp.sendRedirect("showDashboard");
-        }else {
             resp.sendRedirect("index.jsp");
+        }else {
+            info = "User name or password not correct!";
+            req.setAttribute("outputMessage", info);
+            req.getRequestDispatcher("loginFail.jsp").forward(req,resp);
         }
+        
         
     }
 }

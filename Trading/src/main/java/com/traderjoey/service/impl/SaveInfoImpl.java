@@ -55,9 +55,8 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 					}
 				}
 			}
-			System.out.println("************Totally Updated "+ count +" Currencys*************");
-			
 
+			System.out.println("************Totally Updated "+ count +" Currencys*************");
 		} else {
 			throw new EmptyHttpResponseException();
 		}
