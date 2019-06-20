@@ -58,23 +58,23 @@ public CurrencyPriceDAOImplTest() throws ParseException {
 		this.myTimeStamp7 = new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(time7).getTime());	
 		
 		c1 = cdi.getCurrencyByName("c1");
-		c2 = cdi.getCurrencyByName("c2");
+		c2 = cdi.getCurrencyByName("BTC");
 		c3 = cdi.getCurrencyByName("c3");
 	}
 
-//	
-//	
+	
+	
 //	@Test
 //	public void testGetTotal() throws Exception {
 //		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
 //		System.out.println(cpdi.getTotal());
-//		assertEquals(4,cpdi.getTotal());
+//		assertEquals(0,cpdi.getTotal());
 //	}
 //
 //	@Test
 //	public void testGetTotalInt() throws Exception {
 //		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-//		assertEquals(2,cpdi.getTotal(20));
+//		assertEquals(1,cpdi.getTotal(1));
 //	}
 //
 //	@Test
@@ -83,42 +83,42 @@ public CurrencyPriceDAOImplTest() throws ParseException {
 //		System.out.println(cpdi.getPriceList(20));
 //	}
 
-//	@Test
-//	public void testAddOrUpdate() throws Exception {
-//
-//		//set my test CurrencyPrice record
-//
-//		cp1.setPrice(20.1f);
-//		cp1.setTimestamp(myTimeStamp2);
-//		cp1.setCurrency(c2);
-//
-//		
-//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-//		System.out.println("strat CurrencyPriceDAO");
-//		
-//		cpdi.addOrUpdate(cp1);
-//	}
-	
-//
-//	@Test
-//	public void testGetPriceListIntTimestampInt() throws Exception {
-//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-//		List<CurrencyPrice> list = cpdi.getPriceList(20, myTimeStamp, 4);
-//		for(CurrencyPrice cp : list) {
-//			System.out.println(cp.getTimestamp());
-//			System.out.println(cp.getCurrency().getId());
-//		}
-//	}
+	@Test
+	public void testAddOrUpdate() throws Exception {
 
-//	@Test
-//	public void testGetPriceListInt() throws Exception {
-//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-//		List<CurrencyPrice> list = cpdi.getPriceList(20);
-//		for(CurrencyPrice cp : list) {
-//			System.out.println(cp.getTimestamp());
-//			System.out.println(cp.getPrice());
-//		}
-//	}
+		//set my test CurrencyPrice record
+
+		cp1.setPrice(20.1f);
+		cp1.setTimestamp(myTimeStamp2);
+		cp1.setCurrency(c2);
+
+		
+		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+		System.out.println("strat CurrencyPriceDAO");
+		
+		cpdi.addOrUpdate(cp1);
+	}
+	
+
+	@Test
+	public void testGetPriceListIntTimestampInt() throws Exception {
+		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+		List<CurrencyPrice> list = cpdi.getPriceList(1, myTimeStamp1, 4);
+		for(CurrencyPrice cp : list) {
+			System.out.println(cp.getTimestamp());
+			System.out.println(cp.getCurrency().getId());
+		}
+	}
+
+	@Test
+	public void testGetPriceListInt() throws Exception {
+		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+		List<CurrencyPrice> list = cpdi.getPriceList(20);
+		for(CurrencyPrice cp : list) {
+			System.out.println(cp.getTimestamp());
+			System.out.println(cp.getPrice());
+		}
+	}
 
 
 

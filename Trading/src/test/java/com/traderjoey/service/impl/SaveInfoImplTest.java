@@ -8,4 +8,9 @@ public class SaveInfoImplTest {
 		new SaveInfoImpl().insertInfo();
 	}
 
+//	@Test
+//	public void testSaveInfoImpl() throws Exception {
+//	
+//	}
+
 }

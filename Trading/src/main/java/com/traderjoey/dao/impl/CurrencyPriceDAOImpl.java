@@ -293,6 +293,8 @@ public class CurrencyPriceDAOImpl implements CurrencyPriceDAO{
 				
 				// start a transaction
 				session.beginTransaction();
+				System.out.println(currencyPrice.getCurrency().getId());
+				System.out.println(currencyPrice.getTimestamp());
 				//get the latest currency price record. Update it if needed
 				String queryString = "FROM CurrencyPrice WHERE currency_id = :id AND time_stamp = :time_stamp";
 				Query query = session.createQuery(queryString);

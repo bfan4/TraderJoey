@@ -1,5 +1,7 @@
 create database traderjoey;
 
+use traderjoey;
+
 create table user (
 	id int auto_increment,
 	name varchar(20),
