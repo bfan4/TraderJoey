@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 @Table(name="currency_price")
 public class CurrencyPrice {
@@ -27,6 +31,12 @@ public class CurrencyPrice {
 	@JoinColumn(name="currency_id")
 	private Currency currency;
 	
+	@Override
+	public String toString() {
+		return "CurrencyPrice [record=" + record + ", price=" + price + ", currency=" + currency.getName() + ", timestamp="
+				+ timestamp + "]";
+	}
+
 	@Column(name="time_stamp")
 	private Timestamp timestamp;
 
@@ -58,7 +68,7 @@ public class CurrencyPrice {
 	public Currency getCurrency() {
 		return currency;
 	}
-
+	
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
 	}

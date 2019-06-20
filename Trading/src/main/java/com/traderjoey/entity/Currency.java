@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 @Entity
 @Table(name="currency")
 public class Currency {
@@ -23,6 +27,7 @@ public class Currency {
 	private int id;
 	
 	@Column(name="name")
+	@JsonProperty(value = "currency")
 	private String name;
 	
 	@Column(name="current_price")
@@ -56,10 +61,12 @@ public class Currency {
 		this.id = id;
 	}
 
+	@JsonGetter("currency")
 	public String getName() {
 		return name;
 	}
 
+	@JsonSetter("name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -70,6 +77,11 @@ public class Currency {
 
 	public void setCurrentPrice(float currentPrice) {
 		this.currentPrice = currentPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Currency [id=" + id + ", name=" + name + ", currentPrice=" + currentPrice + "]";
 	}
 
 

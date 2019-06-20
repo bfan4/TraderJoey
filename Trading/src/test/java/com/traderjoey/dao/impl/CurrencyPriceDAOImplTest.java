@@ -58,30 +58,30 @@ public CurrencyPriceDAOImplTest() throws ParseException {
 		this.myTimeStamp7 = new Timestamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(time7).getTime());	
 		
 		c1 = cdi.getCurrencyByName("c1");
-		c2 = cdi.getCurrencyByName("c2");
+		c2 = cdi.getCurrencyByName("BTC");
 		c3 = cdi.getCurrencyByName("c3");
 	}
 
 	
 	
-	@Test
-	public void testGetTotal() throws Exception {
-		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-		System.out.println(cpdi.getTotal());
-		assertEquals(0,cpdi.getTotal());
-	}
-
-	@Test
-	public void testGetTotalInt() throws Exception {
-		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-		assertEquals(1,cpdi.getTotal(1));
-	}
-
-	@Test
-	public void testListInt() throws Exception {
-		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
-		System.out.println(cpdi.getPriceList(20));
-	}
+//	@Test
+//	public void testGetTotal() throws Exception {
+//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+//		System.out.println(cpdi.getTotal());
+//		assertEquals(0,cpdi.getTotal());
+//	}
+//
+//	@Test
+//	public void testGetTotalInt() throws Exception {
+//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+//		assertEquals(1,cpdi.getTotal(1));
+//	}
+//
+//	@Test
+//	public void testListInt() throws Exception {
+//		CurrencyPriceDAOImpl cpdi = new CurrencyPriceDAOImpl();
+//		System.out.println(cpdi.getPriceList(20));
+//	}
 
 	@Test
 	public void testAddOrUpdate() throws Exception {

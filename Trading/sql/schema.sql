@@ -30,9 +30,6 @@ create table currency_price(
 	on delete cascade on update cascade
 );
 
-
-	OXBTC, BTC, LTC, ETH, ZEC, DASH, XMR, BCH, NEO, EOS, PETH
-
 	INSERT INTO currency VALUES (0, "OXBTC", 0);
 	INSERT INTO currency VALUES (0, "BTC", 0);
 	INSERT INTO currency VALUES (0, "LTC", 0);
@@ -42,4 +39,4 @@ create table currency_price(
 	INSERT INTO currency VALUES (0, "XMR", 0);
 	INSERT INTO currency VALUES (0, "BCH", 0);
 	INSERT INTO currency VALUES (0, "NEO", 0);
-	INSERT INTO currency VALUES (0, "EOS", 0);		
+	INSERT INTO currency VALUES (0, "EOS", 0);	
