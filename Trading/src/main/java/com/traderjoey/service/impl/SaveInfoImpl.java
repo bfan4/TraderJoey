@@ -40,9 +40,9 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
                 nameList.add(name);
             }
 
-			
 			// currencyPrice.currency is an object rather than a String
 			CurrencyPrice[] currencyPrices = mapper.readValue(responseString, CurrencyPrice[].class);
+			int count = 0;
 			for(int i =0; i < currencyPrices.length; i++) {
 				for(Symbol symbol : Symbol.values()) {
 					if(nameList.get(i).equalsIgnoreCase(symbol.toString())) {
@@ -51,9 +51,11 @@ public class SaveInfoImpl extends HttpGetServiceImpl {
 						System.out.println(currencyPrices[i]);
 						cpList.add(currencyPrices[i]);
 						new CurrencyPriceDAOImpl().addOrUpdate(currencyPrices[i]);
+						count++;
 					}
 				}
 			}
+			System.out.println("************Totally Updated "+ count +" Currencys*************");
 			
 
 		} else {
