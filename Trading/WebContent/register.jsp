@@ -10,9 +10,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>Sign up</title>
 <script>
 	// Function to check Whether both passwords 
@@ -47,52 +45,99 @@
 
 
 
-<body>
-	<div class="row">
-		<div class="col col-lg-12" style="height: 200px;"></div>
+<body style="background-color: rgba(21, 82, 240)">
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#"><font
+			style="color: rgb(5, 103, 208)">Coinboss</font></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" href="help.jsp">Help</a> <a
+					class="nav-item nav-link" href="prices.jsp">Prices</a>
+			</div>
+		</div>
+
+		<a href="login.jsp" class="btn btn-primary"
+			style="margin-right: 40px; color: white;">Sign In</a>
+
+	</nav>
+
+
+
+
+	<div class="row" style="width:100%;">
+		<div class="col col-lg-12" style="height: 80px;"></div>
 	</div>
 
-	<div class="row">
-		<div class="col col-lg-4" style="height: auto;"></div>
-		<div class="col col-lg-4" style="height: 575px;">
-            <!-- onSubmit="return checkPassword(this)" -->
+	<div class="row" style="width:100%;">
+		<div class="col col-lg-12"
+			style="height: 100px; color: white; text-align: center;">
+			<h3>Create your account</h3>
+		</div>
+	</div>
+
+	<div class="row" style="width:100%;">
+		<div class="col col-lg-3" style="height: auto;"></div>
+		<div class="col col-lg-6" style="height: 500px;">
+			<!-- onSubmit="return checkPassword(this)" -->
 			<!-- Sign up form -->
-			<form action="RegisterServlet"  method="POST">
-				<div class="form-group">
-					<label>Your User name</label> <input class="form-control"
-						name="username" placeholder="Choice your own user name"> <small
-						id="usernamehelp" class="form-text text-muted">You may
-						user your email as your user name</small>
+			<div class="card bg-light text-white">
+				<div class="card-body ">
+					<form action="RegisterServlet" method="POST"
+						onSubmit="return checkPassword(this)">
+						<div class="form-group">
+							<label style="color: black">Your User name</label> <input
+								class="form-control" name="username"
+								placeholder="Choice your own user name"> <small
+								id="usernamehelp" class="form-text text-muted">You may
+								user your email as your user name</small>
+						</div>
+						<div class="form-group">
+							<label style="color: black">Password</label> <input
+								type="password" class="form-control" name="password"
+								placeholder="Password"> <small id="usernamehelp"
+								class="form-text text-muted"> <span>Be a minimum
+									of eight (8) characters in length;</span>
+							</small>
+						</div>
+						<div class="form-group">
+							<label style="color: black">Please confirm your password</label>
+							<input type="password" class="form-control" name="checkpassword"
+								placeholder="Comfirm Password">
+						</div>
+						<div class="form-group">
+							<input type="checkbox" value="confirm-policy"> 
+							<label style="color: black;margin-left:10px;">I certify that I agree to the User Agreement and Privacy Policy. </label>
+						</div>
+						<button type="submit" class="btn btn-block btn-primary">Create
+							account</button>
+					</form>
 				</div>
-				<div class="form-group">
-					<label>Password</label> <input type="password" class="form-control"
-						name="password" placeholder="Password"> <small
-						id="usernamehelp" class="form-text text-muted"> <span>Be
-							a minimum of eight (8) characters in length;</span><br> <span>Contain
-							at least one (1) character from three (3) of the following
-							categories:</span><br> <span> * Upper case letter (A-Z);</span><br>
-						<span> * Lower case letter (A-Z);</span><br> <span> *
-							Special character (~`!@#$%^&*()+=_-{}[]\|:;”’?/<>,.) </span><br>
-					</small>
-				</div>
-				<div class="form-group">
-					<label>Please confirm your password</label> <input type="password"
-						class="form-control" name="checkpassword"
-						placeholder="Comfirm Password">
-				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
+			</div>
 			<!-- sign up form end -->
 
 		</div>
 
-		<div class="col col-lg-4" style="height: auto;"></div>
+		<div class="col col-lg-3" style="height: auto;"></div>
+	</div>
+	<div class="row" style="width:100%;">
+	
+	<div class="col col-lg-4" style="height: auto;"></div>
+	
+	<div class="col col-lg-4" style="height: auto; text-align:center;">
+	<font color="white">Already have a Coinboss account?</font>
+	<a href="login.jsp" style="color:white;">Log in</a>
+	</div>
+	
+	<div class="col col-lg-4" style="height: auto;"></div>
+	
 	</div>
 
-	<div class="row">
-		<div class="col col-lg-12"
-			style="height: 50px; background-color: black"></div>
-	</div>
 
 
 
