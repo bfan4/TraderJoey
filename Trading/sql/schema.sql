@@ -29,3 +29,17 @@ create table currency_price(
 	constraint fk_currency foreign key (currency_id) references currency (id) 
 	on delete cascade on update cascade
 );
+
+
+	OXBTC, BTC, LTC, ETH, ZEC, DASH, XMR, BCH, NEO, EOS, PETH
+
+	INSERT INTO currency VALUES (0, "OXBTC", 0);
+	INSERT INTO currency VALUES (0, "BTC", 0);
+	INSERT INTO currency VALUES (0, "LTC", 0);
+	INSERT INTO currency VALUES (0, "ETH", 0);
+	INSERT INTO currency VALUES (0, "ZEC", 0);
+	INSERT INTO currency VALUES (0, "DASH", 0);
+	INSERT INTO currency VALUES (0, "XMR", 0);
+	INSERT INTO currency VALUES (0, "BCH", 0);
+	INSERT INTO currency VALUES (0, "NEO", 0);
+	INSERT INTO currency VALUES (0, "EOS", 0);		
