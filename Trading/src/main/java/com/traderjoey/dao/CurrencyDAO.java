@@ -1,6 +1,6 @@
 package com.traderjoey.dao;
 
-import com.traderjoey.bean.Currency;
+import com.traderjoey.entity.Currency;
 import com.traderjoey.bean.CurrencyPrice;
 /**
  * FIXME chen
@@ -8,24 +8,19 @@ import com.traderjoey.bean.CurrencyPrice;
  *
  */
 public interface CurrencyDAO {
+
 	/**
-	 * 以下都是增删改查
 	 * 
+	 * @param currency
 	 */
 	public void add(Currency currency);
 
-	public void delete(Currency currency);
+	public void delete(int id);
 
-	public void update(Currency currency);
+	public void updateCurrentPrice(int id, float currentPrice);
 
-	public int get(Currency currency);
+	public int getIdByName(String name);
 	
-	/**
-	 * 在api远程取到了最新的价格之后,不止要在CurrencyPrices表里面插入,还要在这里更新
-	 * @param currencyPrice
-	 */
-	public void setMostRecentPrice(CurrencyPrice currencyPrice);
-	
-	public CurrencyPrice getMostRecentPrice(Currency currency);
+	public Currency getCurrencyByName(String name);
 
 }
